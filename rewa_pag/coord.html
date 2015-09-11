@@ -1,0 +1,146 @@
+﻿<html>
+
+    <head>
+
+
+        <title> PosEcra2014 </title>
+    
+    <link href="scripts/jquery-ui.custom/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <script src="scripts/jquery-2.1.1.js" type="text/javascript" ></script>
+    <script src="scripts/jquery-ui.custom/jquery-ui.js" type="text/javascript" ></script>
+
+
+<style>
+    @font-face {
+            font-family: CircularStd-Book;
+            src: local('CircularStd-Book'), url('media/fonts/CircularStd-Book.otf') format('truetype');
+
+        }
+        @font-face {
+            font-family: CircularStd-Medium;
+            src: local('CircularStd-Medium'), url('media/fonts/CircularStd-Medium.otf') format('truetype');
+        }
+        @font-face {
+            font-family: CircularStd-BlackItalic;
+            src: local('CircularStd-BlackItalic'), url('media/fonts/CircularStd-BlackItalic.otf') format('truetype');
+        }
+
+        
+
+
+</style>
+
+
+    </head>
+
+
+
+
+    <body align="center">
+
+        <div id="container" align="center">
+
+            <img src="key_00000.jpg" width="950" height="550" usemap="#mapa" border="0" />
+
+            <map name="mapa">
+
+                <area shape="rect" id="link1" coords="120,110,260,200" onclick="link1()" alt="kite[manu_aute]" />
+
+                <area shape="rect" id="link2" coords="240,360,330,470" onclick="link2()" alt="net[hao]" />
+                
+                <area shape="rect" id="link3" coords="450,160,580,260" onclick="link3()" alt="mat[whariki]" />
+
+                <area shape="rect" id="link4" coords="480,310,630,410" onclick="link4()" alt="hive[kohanga_pi]" />
+
+                <area shape="rect" id="link5" coords="610,100,740,200" onclick="link5()" alt="bird[manu]" />
+
+                <area shape="rect" id="link6" coords="730,220,930,310" onclick="link6()" alt="meeting_place[marae]" />
+            
+            </map> 
+
+        </div>
+
+
+<script>  
+
+
+
+        function link1() {
+            dialog_delete ();
+            content_get( 'kite[manu_aute]','//player.vimeo.com/video/112291964?title=0&amp;byline=0&amp;portrait=0&amp;color=00ff00&amp;autoplay=1&amp;loop=1');
+            define_dialog();        }
+        function link2() {
+            dialog_delete ();
+            content_get( 'net [hao]','//player.vimeo.com/video/112288140?title=0&amp;byline=0&amp;portrait=0&amp;color=00ff00&amp;autoplay=1&amp;loop=1');
+            define_dialog();        }
+        function link3() {
+            dialog_delete ();
+            content_get( 'mat [whariki]','//player.vimeo.com/video/112289425?title=0&amp;byline=0&amp;portrait=0&amp;color=00ff00&amp;autoplay=1&amp;loop=1');
+            define_dialog();        }
+        function link4() {
+            dialog_delete ();
+            content_get( 'hive [kohanga_pi]','//player.vimeo.com/video/112285607?title=0&amp;byline=0&amp;portrait=0&amp;color=00ff00&amp;autoplay=1&amp;loop=1');
+            define_dialog();        }
+        function link5() {
+            dialog_delete ();
+            content_get( 'bird [manu]','//player.vimeo.com/video/112291265?title=0&amp;byline=0&amp;portrait=0&amp;color=00ff00&amp;autoplay=1&amp;loop=1');
+            define_dialog();        }
+        function link6() {
+            dialog_delete ();
+            content_get( 'meeting place [marae]','//player.vimeo.com/video/112288771?title=0&amp;byline=0&amp;portrait=0&amp;color=00ff00&amp;autoplay=1&amp;loop=1');
+            define_dialog();
+            
+        }   
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        function content_get( targetTitle, targetURL  ) {
+             $( document.body ).append( '<div id="content_dialog" class="dialog_container" title="'+targetTitle+'"></div>');
+
+            //console.log(val.targetUrl);
+            $( "#content_dialog" ).append( '<iframe id="myIframe" src="'+ targetURL +'" width="600" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
+        }//end of funtion
+
+
+        function define_dialog () {
+
+            $( "#content_dialog" ).dialog({
+                //autoOpen: false
+                height: "auto",
+                width: "auto",
+                resizable: false,
+
+                position: {
+                my: "center",
+                at: "center"
+                },
+                
+                close: function( event, ui ) {
+                    //write your function here or call function here
+                   dialog_delete();
+                }
+            }); 
+
+            $(".ui-dialog-title").css({
+                'font-family': 'CircularStd-Medium',
+                'font-size': '10px',
+            });
+        }
+
+        function dialog_delete ( ) {
+            //destroy the jquery-ui tabs object
+            $("#content_dialog").dialog( "destroy" );
+            //delete all content with .dynamic_Tab class
+            $( ".dialog_container" ).remove();
+        }//end of funtion
+
+</script>  
+
+
+
+
+
+    </body>
+
+</html>

@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    
+   
+    <link href="scripts/jquery-ui.custom/jquery-ui.css" rel="stylesheet" type="text/css"/>
+
+    <style>
+        
+        @font-face {
+            font-family: CircularStd-Book;
+            src: local('CircularStd-Book'), url('media/fonts/CircularStd-Book.otf') format('truetype');
+
+        }
+        @font-face {
+            font-family: CircularStd-Medium;
+            src: local('CircularStd-Medium'), url('media/fonts/CircularStd-Medium.otf') format('truetype');
+        }
+        @font-face {
+            font-family: CircularStd-BlackItalic;
+            src: local('CircularStd-BlackItalic'), url('media/fonts/CircularStd-BlackItalic.otf') format('truetype');
+        }
+        
+        *{
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        html, body {
+            height: 100%;
+            /*disable text selection
+            on all page
+            check if it works on all browsers*/
+            /*
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            */
+            /*disable text selection*/
+        }
+
+        body {
+            background-color: #222222;
+            margin: 0;
+            font-family: Helvetica, sans-serif;
+            overflow: hidden;
+        }
+
+        a {
+            color: #000000;
+            text-decoration:none;
+        }
+
+        #info {
+            position: fixed;
+            bottom: 10px;
+            right: 30px;
+           
+            font-size: 10px;
+            font-family: CircularStd-Medium;
+            text-align: right;
+            z-index: -1;
+        }
+
+        #info a {
+            color: #444444;
+        }
+
+
+        #menu {
+            position: absolute;
+            bottom: 40px;
+            right:30px; 
+            width: 100%;
+            text-align: right;
+        }
+
+
+
+        .element {
+            
+            width: 600px;
+            height: 600px;
+            font-family: CircularStd-Book;
+            /*
+            box-shadow: 0px 0px 50px rgba(255,255,255,0.5);
+            border: 5px solid rgba(127,127,127,0.5);
+            */
+            text-align: center;
+            cursor: default;
+        }
+        .element:hover {
+            /*
+            box-shadow: 0px 0px 75px rgba(34,247,50,0.5);
+            border: 3px solid rgba((34,247,50,0.5);
+            */
+        }
+
+        .element .img_container {
+            
+            height:90%;
+            margin: 0 auto;
+        }
+
+        .element .img_ovelay {
+            
+            position: absolute;
+            top: 0px;
+            width:100%; 
+            height:90%;
+           
+            /*
+             margin: 0 auto;
+             
+            border: 3px solid rgba(255,255,255,0.5);
+            background-color: rgba(255,255,255,0.2);
+            */
+        }
+        .element .img_ovelay:hover {
+            background-color: rgba(0,0,0,0.7);
+            outline: 5px solid rgba(34,247,50,0.7);
+            box-shadow: 0px 0px 150px rgba(34,247,50,1);
+            
+        }
+        
+        .element .details {
+            position:absolute;
+            bottom:0;       
+
+            font-size:25pt;
+
+            color: #888888;
+            /*
+            box-shadow: 0px 0px 50px rgba(0(34,247,50.5);
+            border: 5px solid rgba(0(34,247,50.5);
+            */
+        }
+        .element .details:hover {       
+            color: #22f732;
+            /*
+            box-shadow: 0px 0px 50px rgba(0(34,247,50.5);
+            border: 5px solid rgba(0(34,247,50.5);
+            */
+        }
+
+        
+
+
+        input.button1 {
+            color: rgba(127,127,127,0.75);
+            background: transparent;
+            background-color: rgba(50,50,50,0.7);
+
+            outline: 1px solid rgba(127,127,127,0.75);
+            border: 0px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        input.button1:hover {
+            outline: 1px solid rgba(34,247,50,1);
+            color: rgba(34,247,50,1);
+            background-color: rgba(41,41,41,1);
+        }
+        input.button1:active {
+            color: #222222;
+            background-color: rgba(34,247,50,175);
+        }
+
+      
+       /*dialog css*/
+        .ui-dialog {
+            font-family: CircularStd-Medium;
+            font-size: 5px,
+        }
+        
+
+
+        .accordion_container{
+            width: 600px;
+        }
+
+        .accordion_panel{
+            height: 150px;
+            overflow: auto;
+        }
+        
+
+    </style>
+    
+    
+    
+    <script src="scripts/jquery-2.1.1.js" type="text/javascript" ></script>
+    <script src="scripts/jquery-ui.custom/jquery-ui.js" type="text/javascript" ></script>
+    <!--
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    -->
+
+    <script src="build/three.min.js"></script>
+    
+    <script src="js/tween.min.js"></script>
+    <script src="js/TrackballControls.js"></script>
+    <script src="js/CSS3DRenderer.js"></script>
+
+    <script src="js/Projector.js"></script>
+    <script src="js/CanvasRenderer.js"></script>
+
+   
+    <title>Post_Screen Festival</title>
+
+</head>
+
+<body>
+
+
+
+
+
+    <div id="container"></div>
+
+    <div id="info">
+    <a href="http://md.okno.be" target="_blank">Design and development by Márcio Domingues & Caue Martins</a> 
+    <br>
+    <a>Concept and curatorship by Ana Vicente & Helena Ferreira</a> 
+    </div>
+
+    <div id="menu">
+        <input type="button" class="button button1" id="sphere" value="SPHERE"></input>
+        <input type="button" class="button button1" id="display_random" value="RANDOM"></input>
+        <input type="button" class="button button1" id="grid" value="GRID"></input>
+        <input type="button" class="button button1" id="fullscreen" value="FULLSCREEN"></input>
+        <input type="button" class="button button1" id="reset" value="RESET"></input>
+    </div>
+
+    <script>
+
+//////////////////////////////////////////////////////
+///variables
+    var jsonInfo;
+
+    var camera, scene, renderer;
+    var controls;
+
+    var objects = [];
+    var targets = { sphere: [], display_random: [], grid: [] };
+
+
+//////////////////////////////////////////////////////
+///Ajax calls and other stuff
+
+    function processData(returnedData, status) {
+        //$("#ajaxStatusMessage").append("Status: " + status + "<br>");
+        //console.dir(returnedData);
+        
+        jsonInfo = returnedData;
+        
+        for (var i=0; i < returnedData.artists.length; i++) {
+            
+            var artist = returnedData.artists[i];
+
+            ///generate main div for content holding
+            var element = document.createElement( 'div' );
+            element.className = 'element';
+
+
+            var img_container = document.createElement( 'div' );
+            img_container.className = 'img_container';
+            //img_container.innerHTML = artist.name ;
+            img_container.style.width = "'"+ artist.imgSizeX +"px'";
+            img_container.style.height = "'"+ artist.imgSizeY +"px'";
+
+            element.appendChild( img_container );
+
+    
+        
+            ///image tag for the background
+            var image = document.createElement( 'img' );
+            //image.style.position = 'absolute';
+            
+            image.style.width = '100%';
+            image.style.height = '100%';
+            image.style.opacity = '0.8';
+            image.src = artist.img;
+            
+            img_container.appendChild( image );
+            
+          
+         
+            var img_ovelay = document.createElement( 'div' );
+            img_ovelay.className = 'img_ovelay';
+            //id for the dialog trigger
+            img_ovelay.id='opener'+i;
+            //img_container.innerHTML = artist.name ;
+            img_ovelay.addEventListener("click", generate_content_dialog( img_ovelay.id, artist.title, artist.targetUrl), false);
+            element.appendChild( img_ovelay );
+            
+            ///create div for name and tabs target content
+            var details= document.createElement("div"); //Create left div
+            details.className = "details"; //Assign div id
+            //details.setAttribute("style", "float:left; width:100%; line-height: 26px; text-align:left; font-size:20pt; padding-left:0px; margin-bottom:-70px;  height:20px;"); //Set div attributes
+            //leftDiv.style.color =  "#888888";
+            details.innerHTML = artist.name ;
+            details.id='accordian_opener'+i;
+            details.addEventListener("click", generate_accordion_dialog( details.id, artist.bioID, artist.title, artist.bio, artist.descricao, artist.Caption), false);
+
+            element.appendChild(details);
+            
+            /*
+            a = document.createElement('a');
+            a.href =  artist.targetUrl; // Insted of calling setAttribute 
+            a.innerHTML = artist.name; // <a>INNER_TEXT</a>
+            leftDiv.appendChild(a); // Append the link to the div
+            */
+            
+            //////////////////////////////////////////////////////////////////
+            ///three.js
+            ///posicoes iniciais aleatorias
+            var object = new THREE.CSS3DObject( element );
+            
+            object.position.x = Math.random() * 500 - 250;
+            object.position.y = Math.random() * 500 - 250;
+            object.position.z = Math.random() * 500 - 250;
+            
+            objects.push( object );
+        }
+    }
+    //////////////////////////////////////////////////////
+    function reportError(request, status, errorMsg) {
+        console.log("Status: " + status + "<br>Error Message: " + errorMsg);
+        // $("#ajaxStatusMessage").append("Status: " + status + "<br>Error Message: " + errorMsg);
+        // $("#ajaxStatusMessage").addClass("errMsg");
+
+    }
+    //////////////////////////////////////////////////////
+    $.ajax({
+        type: "GET",
+        url: "works.json",
+        dataType: "json",
+        success: processData,
+        error: reportError
+    });
+    //////////////////////////////////////////////////////
+    $( document ).ajaxComplete(function( event,request, settings ) {
+        init();
+        animate();
+    });
+
+
+
+//////////////////////////////////////////////////////
+///generate jquery objects
+
+    function generate_content_dialog( elem_trigger_id, work_title, work_target) {
+        return function () {
+            //clean screen
+            //console.log("hit dialog");
+            dialog_content_delete();
+            accordion_content_delete();
+            //generate dialog
+            dialog_content_create( work_title, work_target );
+            //generate the jquery-ui dialog object
+            define_dialog_obj ( elem_trigger_id );
+        }
+    }
+
+    function generate_accordion_dialog( elem_trigger_id, artist_name, work_title, author_bio, author_descricao, work_caption ) {
+        return function () {
+            //clear screen
+            //console.log("hit dialog accordian");
+            dialog_content_delete();
+            accordion_content_delete();
+            //generate tabs
+            accordion_content_create( artist_name, work_title, author_bio, author_descricao, work_caption );
+            //generate the jquery-ui tabs object
+            define_accordion_obj ( elem_trigger_id );
+        }
+    }
+
+///////////////////////////////////////////
+///dialog functions
+
+        ////////////////////////////////////////////
+        ///content creation function
+        function dialog_content_create( targetTitle, targetURL  ) {
+            //console.log("hit func");
+            $( document.body ).append( '<div id="content_dialog" class="dialog_container" title="'+targetTitle+'"></div>');
+
+            //console.log(val.targetUrl);
+            $( "#content_dialog" ).append( '<iframe id="myIframe" src="'+ targetURL +'" width="1000" height="580" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
+        }//end of funtion
+
+        ////////////////////////////////////////////
+        ///content delete function
+        function dialog_content_delete ( ) {
+            //destroy the jquery-ui tabs object
+            $("#content_dialog").dialog( "destroy" );
+            //delete all content with .dynamic_Tab class
+            $( ".dialog_container" ).remove();
+        }//end of funtion
+
+        ////////////////////////////////////////////
+        ///jquery-ui object dialog definition
+        function define_dialog_obj ( elem_trigger_id ) {
+
+            $( "#content_dialog" ).dialog({
+                //autoOpen: false
+                height: "auto",
+                width: "auto",
+                resizable: false,
+
+                position: {
+                my: "center",
+                at: "center"
+                },
+                
+                close: function( event, ui ) {
+                    //write your function here or call function here
+                   dialog_content_delete();
+                }
+            }); 
+
+            $(".ui-dialog-title").css({
+                'font-family': 'CircularStd-Medium',
+                'font-size': '15px',
+            });
+        }//end of funtion
+
+///////////////////////////////////////////
+/// dialog with accordion functions
+    
+        ////////////////////////////////////////////
+        ///content creation function
+        function accordion_content_create( artist_name, work_title, targetBio, targetDescricao, targetCaption ) {
+
+            $( document.body ).append( '<div id="accordion_dialog" class="dialog_accordion_container" title="'+artist_name+'"></div>');
+
+            $( "#accordion_dialog" ).append( '<div id="accordion" class="accordion_container">');
+         
+            $( "#accordion" ).append( "<h3>Caption</h3>"+"<div id='accordion-2' class='accordion_panel'> <p> " + targetCaption +"</p>");
+            $( "#accordion" ).append( "<h3>Summary</h3>"+"<div id='accordion-1' class='accordion_panel'> <p> " + targetDescricao +"</p>");
+            $( "#accordion" ).append( "<h3>Biography</h3>"+"<div id='accordion-2' class='accordion_panel'> <p> " + targetBio +"</p>");
+        }//end of funtion
+
+        ////////////////////////////////////////////
+        ///tabs content delete function
+        function accordion_content_delete ( ) {
+          //destroy the jquery-ui tabs object
+          $("#accordion_dialog").dialog( "destroy" );
+          //delete all content with .dynamic_Tab class
+          $( ".dialog_accordion_container" ).remove();
+        }//end of funtion
+
+        ////////////////////////////////////////////
+        ///jquery-ui object tabs definition
+        function define_accordion_obj ( elem_trigger_id ) {
+            
+            $("#accordion_dialog").dialog({
+                height: "auto",
+                width: "auto",
+                resizable: false,
+
+
+                open: function(){
+                    //$("#accordion").accordion({ autoHeight: true });
+                    $("#accordion").accordion();
+                    $("#accordion").css({
+                        'width':'500px',
+                        'height':'400px',
+                        'font-size': '12px',
+                        'font-family': 'CircularStd-Book',
+                        'z-index' : '1',
+                    });
+                },
+                close: function( event, ui ) {
+                    //write your function here or call function here
+                    accordion_content_delete();
+                }
+        });
+            
+            $(".ui-dialog").css({
+                        'height': '320px',
+                        'left': '50px',
+                        'top':'350px',
+            });
+            //change dialog font and other css properties
+            $(".ui-dialog-title").css({
+                'font-family': 'CircularStd-Medium',
+                'font-size': '15px',
+            });
+
+        }//end of funtion
+
+/////////////////////////////////////////////////////////
+// outside clicks
+
+
+/////////////////////////////////////////////////////////
+// fullscreen
+    function launchIntoFullscreen(element) {
+      if(element.requestFullscreen) {
+        element.requestFullscreen();
+      } else if(element.mozRequestFullScreen) {
+        element.mozRequestFullScreen();
+      } else if(element.webkitRequestFullscreen) {
+        element.webkitRequestFullscreen();
+      } else if(element.msRequestFullscreen) {
+        element.msRequestFullscreen();
+      }
+    }
+
+
+/////////////////////////////////////////////////////////
+///three.js part
+/////////////////////////////////////////////////////////
+    function init() {
+
+            //inicial camera stuff 
+            camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
+            camera.position.z = 3500;
+
+            scene = new THREE.Scene();
+
+            for ( var i = 0; i < objects.length; i ++ ) {
+                scene.add( objects[i] );
+            }
+            //sphere param
+            //size,  
+            sphere(1500);
+
+            //grid param
+            //spacing, number of elements per colum and row  
+            grid(800, 5);
+
+            //random param
+            //size, 
+            display_random(10000);
+
+            //////////////////////////////////////////////////////////
+            ///render
+            renderer = new THREE.CSS3DRenderer();
+            renderer.setSize( window.innerWidth, window.innerHeight );
+            renderer.domElement.style.position = 'absolute';
+            document.getElementById( 'container' ).appendChild( renderer.domElement );
+
+            //////////////////////////////////////////////////////////
+            ///controls
+            controls = new THREE.TrackballControls( camera, renderer.domElement );
+            controls.rotateSpeed = 0.3;
+            controls.minDistance = 1000;
+            controls.maxDistance = 20000;
+            controls.addEventListener( 'change', render );
+
+        //////////////////////////////////////////////////////////
+        ///listener events
+
+            //duracao das transicoes
+            //em mlsegundos > menos tempo
+            dur= 1500;
+            dur1=3000;
+            dur2=1000;
+
+
+            var button = document.getElementById( 'sphere' );
+            button.addEventListener( 'click', function ( event ) {
+
+                transform( targets.sphere, dur );
+
+            }, false );
+
+            var button = document.getElementById( 'display_random' );
+            button.addEventListener( 'click', function ( event ) {
+                
+
+                //TODO
+                //calling function aggain justs adds mode objects to array
+                //check how to replace them
+                //console.log(targets.display_random);
+                display_random(5000);
+                transform( targets.display_random, dur );
+
+            }, false );
+
+            var button = document.getElementById( 'grid' );
+            button.addEventListener( 'click', function ( event ) {
+
+                transform( targets.grid, dur2 );
+
+            }, false );
+
+
+            var button = document.getElementById( 'fullscreen' );
+            button.addEventListener( 'click', function ( event ) {
+                
+                launchIntoFullscreen(document.documentElement);
+
+            }, false );
+
+             var button = document.getElementById( 'reset' );
+            button.addEventListener( 'click', function ( event ) {
+                
+                camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
+                camera.position.z = 3500;
+
+                controls = new THREE.TrackballControls( camera, renderer.domElement );
+                controls.rotateSpeed = 0.3;
+                controls.minDistance = 1000;
+                controls.maxDistance = 20000;
+                controls.addEventListener( 'change', render );
+                
+            }, false );
+
+            transform( targets.sphere, dur1 );
+
+            window.addEventListener( 'resize', onWindowResize, false );
+
+        }
+
+        //deals with transictions
+        function transform( targets, duration ) {
+
+            TWEEN.removeAll();
+
+            for ( var i = 0; i < objects.length; i ++ ) {
+
+                var object = objects[ i ];
+                var target = targets[ i ];
+                //Mexe um objecto para a tosição .to
+                //com o periodo de transicao easing 
+                new TWEEN.Tween( object.position )
+                .to( { x: target.position.x, y: target.position.y, z: target.position.z }, Math.random() * duration + duration )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+
+                new TWEEN.Tween( object.rotation )
+                .to( { x: target.rotation.x, y: target.rotation.y, z: target.rotation.z }, Math.random() * duration + duration )
+                .easing( TWEEN.Easing.Exponential.InOut )
+                .start();
+            }
+
+            new TWEEN.Tween( this )
+            .to( {}, duration * 20 )
+            .onUpdate( render )
+            .start();
+        }
+
+
+        function onWindowResize() {
+            //mantem tudo no ceentro da imagem
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix()
+            renderer.setSize( window.innerWidth, window.innerHeight );
+
+            render();
+        }
+
+
+        function animate() {
+
+            requestAnimationFrame( animate );
+
+            TWEEN.update();
+
+            controls.update();
+
+        }
+
+        function render() {
+
+            renderer.render( scene, camera );
+
+        }
+
+        //////////////////////////////////////////////////////////
+        ///drawing shapes
+        
+        //sphere
+        function sphere(size){
+            var vector = new THREE.Vector3();
+
+            for ( var i = 0, l = objects.length ; i < l; i ++ ) {
+                //console.dir(objects.length);
+                //i + 1  to fix the 0 -> 1 problem
+                var phi = Math.acos( -1 + ( 2 * i + 1 ) / l );
+                var theta = Math.sqrt( l * Math.PI ) * phi;
+
+                //os meus objecto na cena
+                //modificar para outra coisa como images
+                var object = new THREE.Object3D();
+
+                // podemos por um barra de zoom 
+                // para alterar o valor inteiro para o tamanho da espera
+                object.position.x = size * Math.cos( theta ) * Math.sin( phi );
+                object.position.y = size * Math.sin( theta ) * Math.sin( phi );
+                object.position.z = size * Math.cos( phi );
+
+                vector.copy( object.position ).multiplyScalar( 3 );
+
+                object.lookAt( vector );
+
+                targets.sphere.push( object );
+            }
+        }
+
+        //grid
+        function grid(spacing, number){
+
+            for ( var i = 0; i < objects.length; i ++ ) {
+
+                var object = new THREE.Object3D();
+
+                object.position.x = (( ( i % number ) * spacing ) - (2*spacing));
+                object.position.y = ( - ( Math.floor( i / number ) % number ) * spacing ) + (2*spacing);
+                object.position.z = (( - Math.floor( i / (number * number) ) ) * spacing) - (3*spacing) ;
+
+                targets.grid.push( object );
+
+            }
+        }
+
+        //random
+        function display_random( size ){
+
+            var vector = new THREE.Vector3();
+
+            //very strange way of deleting array
+            targets.display_random.length = 0;
+
+            for ( var i = 0, l = objects.length; i < l; i ++ ) {
+                //console.dir(objects.length);
+
+                var object = new THREE.Object3D();
+
+                object.position.x = Math.random() * size - (size/2);
+                object.position.y = Math.random() * size - (size/2);
+                object.position.z = Math.random() * size - (size/2);
+                //object.position.normalize();
+                //object.position.multiplyScalar( Math.random() * size - (size/2) );
+
+                axis = new THREE.Vector3( 1, 1, 1 );
+                PI2 = Math.PI * 2;
+                angle = Math.random() * PI2;
+                object.rotateOnAxis (axis, angle)
+
+                vector.copy( object.position ).multiplyScalar( 2 );
+
+                object.lookAt( vector );
+
+                targets.display_random.push( object );
+            }
+
+        }
+
+        </script>
+
+    </body>
+    </html>
